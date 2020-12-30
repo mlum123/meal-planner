@@ -1,27 +1,57 @@
 import React from "react";
 import {
+  Container,
+  Row,
+  Col,
   Card,
   Button,
   CardImg,
   CardTitle,
   CardSubtitle,
   CardBody,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  Form,
+  FormGroup,
+  Label,
+  Input,
 } from "reactstrap";
 import "./Recipe.css";
 
 class Recipe extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      day: null,
+      time: null,
+      modal: false,
+    };
+
     this.addRecipe = this.addRecipe.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   addRecipe() {
-    this.props.onAdd(this.props.recipe);
+    this.props.onAdd(this.props.recipe, this.state.day, this.state.time);
+    this.toggle();
   }
 
   removeRecipe() {
-    this.props.onRemove(this.props.recipe);
+    this.props.onRemove(this.props.recipe, this.state.day, this.state.time);
+  }
+
+  toggle() {
+    this.setState({ modal: !this.state.modal });
+  }
+
+  handleChange(event) {
+    let { name, value } = event.target;
+
+    this.setState({ [name]: value });
   }
 
   renderAction() {
@@ -36,12 +66,150 @@ class Recipe extends React.Component {
       );
     } else {
       return (
-        <Button
-          className="Recipe-action float-right btn-sm"
-          onClick={this.addRecipe}
-        >
-          +
-        </Button>
+        <div>
+          <Button
+            className="Recipe-action float-right btn-sm"
+            onClick={this.toggle}
+          >
+            +
+          </Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+            <ModalHeader>Add recipe to meal schedule</ModalHeader>
+            <ModalBody>
+              <Container>
+                <Row>
+                  <Col xs="7">
+                    <Form>
+                      <FormGroup tag="fieldset">
+                        <Label>Day</Label>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="mon"
+                              onChange={this.handleChange}
+                            />
+                            Monday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="tues"
+                              onChange={this.handleChange}
+                            />
+                            Tuesday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="wed"
+                              onChange={this.handleChange}
+                            />
+                            Wednesday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="thurs"
+                              onChange={this.handleChange}
+                            />
+                            Thursday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="fri"
+                              onChange={this.handleChange}
+                            />
+                            Friday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="sat"
+                              onChange={this.handleChange}
+                            />
+                            Saturday
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="day"
+                              value="sun"
+                              onChange={this.handleChange}
+                            />
+                            Sunday
+                          </Label>
+                        </FormGroup>
+                      </FormGroup>
+                    </Form>
+                  </Col>
+                  <Col xs="5">
+                    <Form>
+                      <FormGroup tag="fieldset">
+                        <Label>Meal</Label>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="time"
+                              value="breakfast"
+                              onChange={this.handleChange}
+                            />
+                            Breakfast
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="time"
+                              value="lunch"
+                              onChange={this.handleChange}
+                            />
+                            Lunch
+                          </Label>
+                        </FormGroup>
+                        <FormGroup check>
+                          <Label check>
+                            <Input
+                              type="radio"
+                              name="time"
+                              value="dinner"
+                              onChange={this.handleChange}
+                            />
+                            Dinner
+                          </Label>
+                        </FormGroup>
+                      </FormGroup>
+                    </Form>
+                  </Col>
+                </Row>
+              </Container>
+              <Button className="SearchButton" onClick={this.addRecipe}>
+                add
+              </Button>
+            </ModalBody>
+          </Modal>
+        </div>
       );
     }
   }

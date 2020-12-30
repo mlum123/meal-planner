@@ -24,6 +24,7 @@ class SearchResults extends React.Component {
                           recipe={recipe}
                           key={recipe.id}
                           onAdd={this.props.onAdd}
+                          isRemoval={false}
                         />
                       );
                     })
