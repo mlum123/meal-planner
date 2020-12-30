@@ -159,65 +159,13 @@ class App extends React.Component {
       ],
       restaurantSearchResults: [],
       meals: {
-        mon: {
-          breakfast: {
-            vegetarian: true,
-            vegan: true,
-            glutenFree: true,
-            dairyFree: true,
-            aggregateLikes: 500,
-            sourceName: "The Best Recipe Website",
-            id: 31,
-            title: "Recipe 11o2u312",
-            readyInMinutes: 30,
-            servings: 2,
-            sourceUrl: "https://www.allrecipes.com/",
-            image:
-              "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-            summary: "Summary summary summary",
-            analyzedInstructions: [
-              {
-                steps: [
-                  {
-                    number: 1,
-                    ingredients: [
-                      { id: 10011, name: "cauliflower" },
-                      { id: 101, name: "rice" },
-                    ],
-                    step: "chop onions",
-                    equipment: [{ id: 123124, name: "food processor" }],
-                  },
-                  {
-                    number: 2,
-                    ingredients: [
-                      { id: 1067, name: "garlic" },
-                      { id: 161, name: "powder" },
-                    ],
-                    step: "boil",
-                    equipment: [{ id: 3451, name: "pot" }],
-                  },
-                  {
-                    number: 3,
-                    ingredients: [
-                      { id: 14, name: "oil" },
-                      { id: 141, name: "water" },
-                    ],
-                    step: "simmer",
-                    equipment: [{ id: 13451, name: "spoon" }],
-                  },
-                ],
-              },
-            ],
-          },
-          lunch: null,
-          dinner: null,
-        },
-        tues: { breakfast: "waffles", lunch: null, dinner: null },
-        wed: { breakfast: "pancakes", lunch: null, dinner: null },
-        thurs: { breakfast: "sandwich", lunch: null, dinner: null },
-        fri: { breakfast: "cereal", lunch: null, dinner: null },
-        sat: { breakfast: "fish", lunch: null, dinner: null },
-        sun: { breakfast: "rice", lunch: null, dinner: null },
+        mon: { breakfast: null, lunch: null, dinner: null },
+        tues: { breakfast: null, lunch: null, dinner: null },
+        wed: { breakfast: null, lunch: null, dinner: null },
+        thurs: { breakfast: null, lunch: null, dinner: null },
+        fri: { breakfast: null, lunch: null, dinner: null },
+        sat: { breakfast: null, lunch: null, dinner: null },
+        sun: { breakfast: null, lunch: null, dinner: null },
       },
     };
     this.addMeal = this.addMeal.bind(this);

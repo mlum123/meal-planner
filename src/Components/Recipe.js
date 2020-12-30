@@ -232,6 +232,8 @@ class Recipe extends React.Component {
             {this.props.recipe.sourceName} {this.props.recipe.summary}
           </CardSubtitle>
           <ul className="ingredients">
+            {" "}
+            {/* TODO PUT ACTUAL INGREDIENTS FROM API*/}
             <li>ingredient 1</li>
             <li>ingredient 2</li>
           </ul>
