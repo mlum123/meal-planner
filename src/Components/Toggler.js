@@ -23,21 +23,21 @@ class Toggler extends React.Component {
               <Col xs="12" className="mt-3 text-center">
                 <ButtonGroup>
                   <Button
-                    className="font-weight-bold pr-3"
+                    className="font-weight-bold px-4"
                     value="recipe"
                     onClick={this.handleClick}
                   >
                     Recipe Search
                   </Button>
                   <Button
-                    className="font-weight-bold pr-3"
+                    className="font-weight-bold px-4"
                     value="restaurant"
                     onClick={this.handleClick}
                   >
                     Restaurant Search
                   </Button>
                   <Button
-                    className="font-weight-bold"
+                    className="font-weight-bold px-4"
                     value="schedule"
                     onClick={this.handleClick}
                   >
@@ -48,7 +48,13 @@ class Toggler extends React.Component {
             </Row>
             <Row>
               <Col xs="12">
-                <View view={this.state.view} />
+                <View
+                  view={this.state.view}
+                  meals={this.props.meals}
+                  onAdd={this.props.onAdd}
+                  onRemove={this.props.onRemove}
+                  recipes={this.props.recipes}
+                />
               </Col>
             </Row>
           </Container>

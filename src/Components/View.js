@@ -10,11 +10,18 @@ class View extends React.Component {
         <header>
           <Container>
             <Row>
-              <Col xs="12" className="mt-3 text-center">
+              <Col xs="12" className="mt-3">
                 {this.props.view === "schedule" ? (
-                  <Schedule />
+                  <Schedule
+                    meals={this.props.meals}
+                    onRemove={this.props.onRemove}
+                  />
                 ) : (
-                  <SearchResults view={this.props.view} />
+                  <SearchResults
+                    view={this.props.view}
+                    onAdd={this.props.onAdd}
+                    recipes={this.props.recipes}
+                  />
                 )}
               </Col>
             </Row>

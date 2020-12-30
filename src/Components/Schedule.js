@@ -10,6 +10,8 @@ class Schedule extends React.Component {
             <Row>
               <Col xs="12" className="mt-3 text-center">
                 <h1>Schedule</h1>
+                {console.log(this.props.meals)}
+                {console.log(this.props.onRemove)}
               </Col>
             </Row>
           </Container>

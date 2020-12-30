@@ -11,26 +11,105 @@ import {
 } from "reactstrap";
 
 class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    let { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  }
+
   render() {
+    let firstInput;
+    let secondInput;
+
+    if (this.props.view === "recipe") {
+      firstInput = "Dish";
+      secondInput = "Ingredients";
+    } else {
+      firstInput = "Restaurant";
+      secondInput = "Location";
+    }
+
+    const cuisines = [
+      "Any",
+      "African",
+      "American",
+      "British",
+      "Cajun",
+      "Caribbean",
+      "Chinese",
+      "Eastern European",
+      "European",
+      "French",
+      "German",
+      "Greek",
+      "Indian",
+      "Irish",
+      "Italian",
+      "Japanese",
+      "Jewish",
+      "Korean",
+      "Latin American",
+      "Mediterranean",
+      "Mexican",
+      "Middle Eastern",
+      "Nordic",
+      "Southern",
+      "Spanish",
+      "Thai",
+      "Vietnamese",
+    ];
+
     return (
       <div className="SearchBar">
         <header>
           <Container>
             <Row>
               <Col xs="12">
-                {this.props.view === "recipe" ? (
+                <div>
+                  <h2 className="mb-4">find a {this.props.view}</h2>
                   <Form>
                     <FormGroup>
                       <Row>
                         <Col xs="3" md="2">
-                          <Label for="ingredients">Ingredients</Label>
+                          <Label for={firstInput.toLowerCase()}>
+                            {firstInput}
+                          </Label>
                         </Col>
                         <Col xs="9" md="10">
                           <Input
                             type="text"
-                            name="ingredients"
-                            id="ingredients"
-                            placeholder="enter the ingredients you want to use, comma-separated"
+                            name={firstInput.toLowerCase()}
+                            id={firstInput.toLowerCase()}
+                            placeholder={`enter ${firstInput.toLowerCase()} name`}
+                            onChange={this.handleChange}
+                          />
+                        </Col>
+                      </Row>
+                    </FormGroup>
+                    <FormGroup>
+                      <Row>
+                        <Col xs="3" md="2">
+                          <Label for={secondInput.toLowerCase()}>
+                            {secondInput}
+                          </Label>
+                        </Col>
+                        <Col xs="9" md="10">
+                          <Input
+                            type="text"
+                            name={secondInput.toLowerCase()}
+                            id={secondInput.toLowerCase()}
+                            placeholder={
+                              this.props.view === "recipe"
+                                ? "enter ingredients in a comma-separated list"
+                                : "enter your city"
+                            }
+                            onChange={this.handleChange}
                           />
                         </Col>
                       </Row>
@@ -41,26 +120,33 @@ class SearchBar extends React.Component {
                           <Label for="cuisine">Cuisine</Label>
                         </Col>
                         <Col xs="9" md="10">
-                          <Input type="select" name="cuisine" id="cuisine">
-                            <option>Chinese</option>
-                            <option>Japanese</option>
-                            <option>Korean</option>
-                            <option>French</option>
-                            <option>Italian</option>
-                            <option>American</option>
+                          <Input
+                            type="select"
+                            name="cuisine"
+                            id="cuisine"
+                            onChange={this.handleChange}
+                          >
+                            {cuisines.map((cuisine) => {
+                              return (
+                                <option
+                                  key={cuisine.toLowerCase()}
+                                  value={cuisine.toLowerCase()}
+                                >
+                                  {cuisine}
+                                </option>
+                              );
+                            })}
                           </Input>
                         </Col>
                       </Row>
                     </FormGroup>
                   </Form>
-                ) : (
-                  <input
-                    placeholder="Enter a restaurant"
-                    onChange={this.handleTermChange}
-                  />
-                )}
-                <Button className="SearchButton" onClick={this.search}>
-                  SEARCH
+                </div>
+                <Button
+                  className="SearchButton float-right"
+                  onClick={this.search}
+                >
+                  search
                 </Button>
               </Col>
             </Row>
