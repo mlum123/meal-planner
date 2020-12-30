@@ -28,12 +28,16 @@ class Schedule extends React.Component {
                     <tr>
                       <th scope="row">Breakfast</th>
                       <td>
-                        <Recipe
-                          recipe={this.props.meals.mon.breakfast}
-                          key={this.props.meals.mon.breakfast.id}
-                          isRemoval={true}
-                          onRemove={this.props.onRemove}
-                        />
+                        {this.props.meals.mon.breakfast ? (
+                          <Recipe
+                            recipe={this.props.meals.mon.breakfast}
+                            key={this.props.meals.mon.breakfast.id}
+                            isRemoval={true}
+                            onRemove={this.props.onRemove}
+                            day="mon"
+                            time="breakfast"
+                          />
+                        ) : null}
                       </td>
                       <td>{this.props.meals.tues.breakfast}</td>
                       <td>{this.props.meals.wed.breakfast}</td>

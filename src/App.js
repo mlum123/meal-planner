@@ -232,6 +232,7 @@ class App extends React.Component {
   }
 
   removeMeal(day, time) {
+    console.log(this.state.meals);
     let meals = this.state.meals;
     meals[day][time] = null;
     this.setState({ meals: meals });

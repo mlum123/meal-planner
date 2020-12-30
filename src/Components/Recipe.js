@@ -24,8 +24,8 @@ class Recipe extends React.Component {
     super(props);
 
     this.state = {
-      day: null,
-      time: null,
+      day: this.props.day,
+      time: this.props.time,
       modal: false,
     };
 
@@ -41,7 +41,7 @@ class Recipe extends React.Component {
   }
 
   removeRecipe() {
-    this.props.onRemove(this.props.recipe, this.state.day, this.state.time);
+    this.props.onRemove(this.state.day, this.state.time);
   }
 
   toggle() {
