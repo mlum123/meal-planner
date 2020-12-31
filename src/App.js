@@ -63,7 +63,10 @@ class App extends React.Component {
   restaurantSearch(restaurant, location, cuisine) {
     Yelp.restaurantSearch(restaurant, location, cuisine).then(
       (restaurantSearchResults) => {
-        if (restaurantSearchResults.length === 0) {
+        if (
+          restaurantSearchResults === undefined ||
+          restaurantSearchResults.length === 0
+        ) {
           // no recipes found, display failure message
           this.setState({
             restaurantSearchResults: [],

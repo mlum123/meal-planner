@@ -16,20 +16,20 @@ class Schedule extends React.Component {
               <thead>
                 <tr>
                   <th></th>
-                  <th>Breakfast</th>
-                  <th>Lunch</th>
-                  <th>Dinner</th>
+                  <th className="text-center">Breakfast</th>
+                  <th className="text-center">Lunch</th>
+                  <th className="text-center">Dinner</th>
                 </tr>
               </thead>
               <tbody>
                 {days.map((day) => {
                   return (
-                    <tr>
+                    <tr key={day}>
                       <th scope="row">{day}</th>
                       {meals.map((meal) => {
                         let lowerCaseMeal = meal.toLowerCase();
                         return (
-                          <td>
+                          <td key={day + lowerCaseMeal}>
                             {this.props.meals[day][lowerCaseMeal] &&
                             (this.props.meals[day][lowerCaseMeal]
                               .analyzedInstructions ||

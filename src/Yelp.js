@@ -10,6 +10,10 @@ const Yelp = {
       restaurant = "restaurants";
     }
 
+    if (cuisine === "" || cuisine === "any") {
+      cuisine = "";
+    }
+
     const endpoint = "businesses/search";
 
     // use cors-anywhere to avoid problems with yelp fusion api

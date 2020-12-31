@@ -264,19 +264,19 @@ class MealCard extends React.Component {
                   {this.props.recipe.vegetarian ? (
                     <div>
                       vegetarian
-                      <span></span> <i class="fas fa-carrot"></i>
+                      <span></span> <i className="fas fa-carrot"></i>
                     </div>
                   ) : null}
                   {this.props.recipe.vegan ? (
                     <div>
                       vegan
-                      <span></span> <i class="fas fa-seedling"></i>
+                      <span></span> <i className="fas fa-seedling"></i>
                     </div>
                   ) : null}
                   {this.props.recipe.readyInMinutes ? (
                     <div>
                       ready in {this.props.recipe.readyInMinutes} min
-                      <span></span> <i class="far fa-clock"></i>
+                      <span></span> <i className="far fa-clock"></i>
                     </div>
                   ) : null}
                   {this.props.recipe.servings ? (
@@ -332,7 +332,7 @@ class MealCard extends React.Component {
               <CardImg
                 src={this.props.restaurant.image}
                 alt="Meal img"
-                className="card-img p-4"
+                className="card-img"
               />
             </div>
             <CardBody>
@@ -342,7 +342,8 @@ class MealCard extends React.Component {
                 </Col>
                 <Col xs="3">{this.renderAction()}</Col>
               </Row>
-              {this.state.showDetails === this.props.key ? (
+              {this.props.view === "restaurant" ||
+              this.state.showDetails === this.props.key ? (
                 <div>
                   {this.props.restaurant.price
                     ? this.props.restaurant.price
@@ -351,8 +352,12 @@ class MealCard extends React.Component {
                     <>
                       {" "}
                       | {this.props.restaurant.rating}{" "}
-                      <i class="fas fa-star"></i>
+                      <i className="fas fa-star"></i>
                     </>
+                  ) : null}
+                  {!this.props.restaurant.price &&
+                  !this.props.restaurant.rating ? (
+                    <br></br>
                   ) : null}
                   <br></br>
                   {this.props.restaurant.transactions.length !== 0 ? (
@@ -365,11 +370,13 @@ class MealCard extends React.Component {
                         return <> {transaction} |</>;
                       })}{" "}
                     </div>
-                  ) : null}
+                  ) : (
+                    <br></br>
+                  )}
                   <br></br>
                   {this.props.restaurant.location ? (
                     <div>
-                      <i class="fas fa-map-marker-alt"></i>{" "}
+                      <i className="fas fa-map-marker-alt"></i>{" "}
                       {this.props.restaurant.location.address1
                         ? this.props.restaurant.location.address1
                         : null}
@@ -394,9 +401,12 @@ class MealCard extends React.Component {
                   ) : null}
                   {this.props.restaurant.phone ? (
                     <div>
-                      <i class="fas fa-phone"></i> {this.props.restaurant.phone}
+                      <i className="fas fa-phone"></i>{" "}
+                      {this.props.restaurant.phone}
                     </div>
-                  ) : null}
+                  ) : (
+                    <br></br>
+                  )}
                   <br></br>
                   {this.props.restaurant.url ? (
                     <Button href={this.props.restaurant.url} target="_blank">

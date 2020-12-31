@@ -12,6 +12,11 @@ class Toggler extends React.Component {
 
   handleClick(event) {
     this.setState({ view: event.target.value });
+
+    // clear form when switching between tabs
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
   }
 
   render() {

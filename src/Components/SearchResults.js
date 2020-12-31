@@ -15,6 +15,11 @@ class SearchResults extends React.Component {
                   view={this.props.view}
                   onRecipeSearch={this.props.onRecipeSearch}
                   onRestaurantSearch={this.props.onRestaurantSearch}
+                  dish=""
+                  ingredients=""
+                  cuisine=""
+                  restaurant=""
+                  location=""
                 />
               </Col>
             </Row>
@@ -27,6 +32,7 @@ class SearchResults extends React.Component {
                         key={recipe.id}
                         onAdd={this.props.onAdd}
                         isRemoval={false}
+                        view={this.props.view}
                       />
                     );
                   })
@@ -37,6 +43,7 @@ class SearchResults extends React.Component {
                         key={restaurant.id}
                         onAdd={this.props.onAdd}
                         isRemoval={false}
+                        view={this.props.view}
                       />
                     );
                   })}

@@ -100,7 +100,7 @@ class SearchBar extends React.Component {
               <Col xs="12">
                 <div>
                   <h2 className="mb-4">find a {this.props.view}</h2>
-                  <Form>
+                  <Form id="SearchForm">
                     <FormGroup>
                       <Row>
                         <Col xs="3" md="2">

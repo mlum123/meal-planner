@@ -9,7 +9,7 @@ class FailedSearch extends React.Component {
           <Container>
             <Row>
               <Col xs="12" className="mt-3">
-                No recipes found — try again!
+                No results found — try again!
               </Col>
             </Row>
           </Container>
