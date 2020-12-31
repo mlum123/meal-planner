@@ -44,6 +44,20 @@ class Schedule extends React.Component {
                                 time={lowerCaseMeal}
                               />
                             ) : null}
+                            {this.props.meals[day][lowerCaseMeal] &&
+                            (this.props.meals[day][lowerCaseMeal].location ||
+                              this.props.meals[day][lowerCaseMeal].price) ? (
+                              <MealCard
+                                restaurant={
+                                  this.props.meals[day][lowerCaseMeal]
+                                }
+                                key={this.props.meals[day][lowerCaseMeal].id}
+                                isRemoval={true}
+                                onRemove={this.props.onRemove}
+                                day={day}
+                                time={lowerCaseMeal}
+                              />
+                            ) : null}
                           </td>
                         );
                       })}

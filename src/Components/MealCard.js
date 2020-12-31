@@ -323,8 +323,90 @@ class MealCard extends React.Component {
             </CardBody>
           </Card>
         ) : (
-          this.props.restaurant
-            .restaurant /* TODO: put restaurant card stuff here */
+          <Card
+            className="Meal h-100 w-100"
+            onMouseEnter={this.onHover}
+            onMouseLeave={this.onHoverLeave}
+          >
+            <div className="mx-auto">
+              <CardImg
+                src={this.props.restaurant.image}
+                alt="Meal img"
+                className="card-img p-4"
+              />
+            </div>
+            <CardBody>
+              <Row>
+                <Col xs="9">
+                  <CardTitle tag="h5">{this.props.restaurant.name}</CardTitle>
+                </Col>
+                <Col xs="3">{this.renderAction()}</Col>
+              </Row>
+              {this.state.showDetails === this.props.key ? (
+                <div>
+                  {this.props.restaurant.price
+                    ? this.props.restaurant.price
+                    : null}
+                  {this.props.restaurant.rating ? (
+                    <>
+                      {" "}
+                      | {this.props.restaurant.rating}{" "}
+                      <i class="fas fa-star"></i>
+                    </>
+                  ) : null}
+                  <br></br>
+                  {this.props.restaurant.transactions.length !== 0 ? (
+                    <div>
+                      |{" "}
+                      {this.props.restaurant.transactions.map((transaction) => {
+                        if (transaction === "restaurant_reservation") {
+                          return <> reservation |</>;
+                        }
+                        return <> {transaction} |</>;
+                      })}{" "}
+                    </div>
+                  ) : null}
+                  <br></br>
+                  {this.props.restaurant.location ? (
+                    <div>
+                      <i class="fas fa-map-marker-alt"></i>{" "}
+                      {this.props.restaurant.location.address1
+                        ? this.props.restaurant.location.address1
+                        : null}
+                      {this.props.restaurant.location.address2
+                        ? this.props.restaurant.location.address2
+                        : null}
+                      {this.props.restaurant.location.address3
+                        ? this.props.restaurant.location.address3
+                        : null}
+                      <br></br>
+                      {this.props.restaurant.location.city
+                        ? this.props.restaurant.location.city
+                        : null}
+                      ,{" "}
+                      {this.props.restaurant.location.state
+                        ? this.props.restaurant.location.state
+                        : null}{" "}
+                      {this.props.restaurant.location.zip_code
+                        ? this.props.restaurant.location.zip_code
+                        : null}
+                    </div>
+                  ) : null}
+                  {this.props.restaurant.phone ? (
+                    <div>
+                      <i class="fas fa-phone"></i> {this.props.restaurant.phone}
+                    </div>
+                  ) : null}
+                  <br></br>
+                  {this.props.restaurant.url ? (
+                    <Button href={this.props.restaurant.url} target="_blank">
+                      Visit Restaurant on Yelp
+                    </Button>
+                  ) : null}
+                </div>
+              ) : null}
+            </CardBody>
+          </Card>
         )}
       </Col>
     );
