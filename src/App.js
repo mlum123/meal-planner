@@ -2,161 +2,15 @@ import React from "react";
 import "./App.css";
 import { Container, Row, Col } from "reactstrap";
 import Toggler from "./Components/Toggler";
+import Spoonacular from "./Spoonacular";
+import FailedSearch from "./Components/FailedSearch";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      recipeSearchResults: [
-        {
-          vegetarian: true,
-          vegan: true,
-          glutenFree: true,
-          dairyFree: true,
-          aggregateLikes: 500,
-          sourceName: "The Best Recipe Website",
-          id: 1123,
-          title: "Recipe 1",
-          readyInMinutes: 30,
-          servings: 2,
-          sourceUrl: "https://www.allrecipes.com/",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-          summary: "Summary summary summary",
-          analyzedInstructions: [
-            {
-              steps: [
-                {
-                  number: 1,
-                  ingredients: [
-                    { id: 10011, name: "cauliflower" },
-                    { id: 101, name: "rice" },
-                  ],
-                  step: "chop onions",
-                  equipment: [{ id: 123124, name: "food processor" }],
-                },
-                {
-                  number: 2,
-                  ingredients: [
-                    { id: 1067, name: "garlic" },
-                    { id: 161, name: "powder" },
-                  ],
-                  step: "boil",
-                  equipment: [{ id: 3451, name: "pot" }],
-                },
-                {
-                  number: 3,
-                  ingredients: [
-                    { id: 14, name: "oil" },
-                    { id: 141, name: "water" },
-                  ],
-                  step: "simmer",
-                  equipment: [{ id: 13451, name: "spoon" }],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          vegetarian: true,
-          vegan: true,
-          glutenFree: true,
-          dairyFree: true,
-          aggregateLikes: 500,
-          sourceName: "The Best Recipe Website",
-          id: 13,
-          title: "Recipe 1",
-          readyInMinutes: 30,
-          servings: 2,
-          sourceUrl: "https://www.allrecipes.com/",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-          summary: "Summary summary summary",
-          analyzedInstructions: [
-            {
-              steps: [
-                {
-                  number: 1,
-                  ingredients: [
-                    { id: 10011, name: "cauliflower" },
-                    { id: 101, name: "rice" },
-                  ],
-                  step: "chop onions",
-                  equipment: [{ id: 123124, name: "food processor" }],
-                },
-                {
-                  number: 2,
-                  ingredients: [
-                    { id: 1067, name: "garlic" },
-                    { id: 161, name: "powder" },
-                  ],
-                  step: "boil",
-                  equipment: [{ id: 3451, name: "pot" }],
-                },
-                {
-                  number: 3,
-                  ingredients: [
-                    { id: 14, name: "oil" },
-                    { id: 141, name: "water" },
-                  ],
-                  step: "simmer",
-                  equipment: [{ id: 13451, name: "spoon" }],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          vegetarian: true,
-          vegan: true,
-          glutenFree: true,
-          dairyFree: true,
-          aggregateLikes: 500,
-          sourceName: "The Best Recipe Website",
-          id: 31,
-          title: "Recipe 1",
-          readyInMinutes: 30,
-          servings: 2,
-          sourceUrl: "https://www.allrecipes.com/",
-          image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
-          summary: "Summary summary summary",
-          analyzedInstructions: [
-            {
-              steps: [
-                {
-                  number: 1,
-                  ingredients: [
-                    { id: 10011, name: "cauliflower" },
-                    { id: 101, name: "rice" },
-                  ],
-                  step: "chop onions",
-                  equipment: [{ id: 123124, name: "food processor" }],
-                },
-                {
-                  number: 2,
-                  ingredients: [
-                    { id: 1067, name: "garlic" },
-                    { id: 161, name: "powder" },
-                  ],
-                  step: "boil",
-                  equipment: [{ id: 3451, name: "pot" }],
-                },
-                {
-                  number: 3,
-                  ingredients: [
-                    { id: 14, name: "oil" },
-                    { id: 141, name: "water" },
-                  ],
-                  step: "simmer",
-                  equipment: [{ id: 13451, name: "spoon" }],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      recipeSearchResults: [],
       restaurantSearchResults: [],
       meals: {
         mon: { breakfast: null, lunch: null, dinner: null },
@@ -170,6 +24,7 @@ class App extends React.Component {
     };
     this.addMeal = this.addMeal.bind(this);
     this.removeMeal = this.removeMeal.bind(this);
+    this.recipeSearch = this.recipeSearch.bind(this);
   }
 
   addMeal(meal, day, time) {
@@ -185,6 +40,25 @@ class App extends React.Component {
     meals[day][time] = null;
     this.setState({ meals: meals });
     console.log(meals);
+  }
+
+  recipeSearch(dish, ingredients, cuisine) {
+    Spoonacular.recipeSearch(dish, ingredients, cuisine).then(
+      (recipeSearchResults) => {
+        if (recipeSearchResults.length === 0) {
+          // no recipes found, display failure message
+          this.setState({
+            recipeSearchResults: [],
+            failedSearch: true,
+          });
+        } else {
+          this.setState({
+            recipeSearchResults: recipeSearchResults,
+            failedSearch: false,
+          });
+        }
+      }
+    );
   }
 
   render() {
@@ -204,17 +78,23 @@ class App extends React.Component {
             <Col xs="12">
               <Toggler
                 meals={this.state.meals}
+                onRecipeSearch={this.recipeSearch}
                 onAdd={this.addMeal}
                 onRemove={this.removeMeal}
                 recipes={this.state.recipeSearchResults}
               />
             </Col>
           </Row>
+          <Row>
+            <Col xs="12" className="text-center">
+              {this.state.failedSearch ? <FailedSearch /> : null}
+            </Col>
+          </Row>
         </Container>
-        <footer className="mb-0 bg-light">
+        <footer className="bg-light">
           <Container fluid="true">
             <p className="text-center p-5 mt-4">
-              made with React, the Spoonacular API, and the Zomato API
+              made with React, the Spoonacular API, and the Yelp Fusion API
             </p>
           </Container>
         </footer>

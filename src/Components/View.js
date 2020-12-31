@@ -19,6 +19,7 @@ class View extends React.Component {
                 ) : (
                   <SearchResults
                     view={this.props.view}
+                    onRecipeSearch={this.props.onRecipeSearch}
                     onAdd={this.props.onAdd}
                     recipes={this.props.recipes}
                   />

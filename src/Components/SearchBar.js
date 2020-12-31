@@ -1,3 +1,4 @@
+// SearchBar for Recipe Search and Restaurant Search views
 import React from "react";
 import {
   Container,
@@ -14,13 +15,24 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = { dish: "", ingredients: "", cuisine: "" };
+
     this.handleChange = this.handleChange.bind(this);
+    this.recipeSearch = this.recipeSearch.bind(this);
   }
 
   handleChange(event) {
     let { name, value } = event.target;
 
     this.setState({ [name]: value });
+  }
+
+  recipeSearch() {
+    this.props.onRecipeSearch(
+      this.state.dish,
+      this.state.ingredients,
+      this.state.cuisine
+    );
   }
 
   render() {
@@ -85,6 +97,7 @@ class SearchBar extends React.Component {
                           <Input
                             type="text"
                             name={firstInput.toLowerCase()}
+                            defaultValue=""
                             id={firstInput.toLowerCase()}
                             placeholder={`enter ${firstInput.toLowerCase()} name`}
                             onChange={this.handleChange}
@@ -103,6 +116,7 @@ class SearchBar extends React.Component {
                           <Input
                             type="text"
                             name={secondInput.toLowerCase()}
+                            defaultValue=""
                             id={secondInput.toLowerCase()}
                             placeholder={
                               this.props.view === "recipe"
@@ -123,6 +137,7 @@ class SearchBar extends React.Component {
                           <Input
                             type="select"
                             name="cuisine"
+                            defaultValue=""
                             id="cuisine"
                             onChange={this.handleChange}
                           >
@@ -144,7 +159,7 @@ class SearchBar extends React.Component {
                 </div>
                 <Button
                   className="SearchButton float-right"
-                  onClick={this.search}
+                  onClick={this.recipeSearch}
                 >
                   search
                 </Button>

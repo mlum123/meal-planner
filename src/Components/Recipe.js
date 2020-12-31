@@ -27,12 +27,15 @@ class Recipe extends React.Component {
       day: this.props.day,
       time: this.props.time,
       modal: false,
+      showDetails: false,
     };
 
     this.addRecipe = this.addRecipe.bind(this);
     this.removeRecipe = this.removeRecipe.bind(this);
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onHover = this.onHover.bind(this);
+    this.onHoverLeave = this.onHoverLeave.bind(this);
   }
 
   addRecipe() {
@@ -52,6 +55,14 @@ class Recipe extends React.Component {
     let { name, value } = event.target;
 
     this.setState({ [name]: value });
+  }
+
+  onHover() {
+    this.setState({ showDetails: this.props.key });
+  }
+
+  onHoverLeave() {
+    this.setState({ showDetails: "" });
   }
 
   renderAction() {
@@ -216,41 +227,87 @@ class Recipe extends React.Component {
 
   render() {
     return (
-      <Card className="Recipe mx-2">
-        <CardImg
-          top
-          width="100%"
-          src={this.props.recipe.image}
-          alt="Card image cap"
-        />
-        <CardBody className="Recipe-information">
-          <CardTitle tag="h5">
-            {this.props.recipe.title}
-            {this.renderAction()}
-          </CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">
-            {this.props.recipe.sourceName} {this.props.recipe.summary}
-          </CardSubtitle>
-          <ul className="ingredients">
-            {" "}
-            {/* TODO PUT ACTUAL INGREDIENTS FROM API*/}
-            <li>ingredient 1</li>
-            <li>ingredient 2</li>
-          </ul>
-          <ol className="instructions">
-            {this.props.recipe.analyzedInstructions[0].steps.map((step) => {
-              return (
-                <li
-                  key={this.props.recipe.id + step.number}
-                >{`${step.number}. ${step.step}`}</li>
-              );
-            })}
-          </ol>
-          <Button href={this.props.recipe.sourceUrl} target="_blank">
-            Visit Recipe Website
-          </Button>
-        </CardBody>
-      </Card>
+      <Col className="xs-12 md-6 lg-4 my-2">
+        <Card
+          className="Recipe h-100"
+          onMouseEnter={this.onHover}
+          onMouseLeave={this.onHoverLeave}
+        >
+          <div className="mx-auto">
+            <CardImg
+              src={this.props.recipe.image}
+              alt="Recipe img"
+              className="card-img p-3"
+            />
+          </div>
+          <CardBody>
+            <CardTitle tag="h5">
+              {this.props.recipe.title} {this.renderAction()}
+            </CardTitle>
+            {this.state.showDetails === this.props.key ? (
+              <div>
+                <ul className="ingredients">
+                  {/* TODO PUT ACTUAL INGREDIENTS FROM API */}
+                  <li>ingredient 1</li>
+                  <li>ingredient 2</li>
+                </ul>
+                <ol className="instructions">
+                  {this.props.recipe.analyzedInstructions[0].steps.map(
+                    (step) => {
+                      return (
+                        <div>
+                          <li
+                            key={this.props.recipe.id + step.number}
+                          >{`${step.number}. ${step.step}`}</li>
+                          <br></br>
+                        </div>
+                      );
+                    }
+                  )}
+                </ol>
+                <Button href={this.props.recipe.sourceUrl} target="_blank">
+                  Visit Recipe Website
+                </Button>
+              </div>
+            ) : null}
+          </CardBody>
+          {/*
+          <CardImg
+            src={this.props.recipe.image}
+            alt="Recipe img"
+            className="card-img mx-auto py-4"
+          />
+          <CardBody className="Recipe-title">
+            <CardTitle tag="h5">
+              {this.props.recipe.title}
+              {this.renderAction()}
+            </CardTitle>
+            <CardSubtitle tag="h6" className="mb-2 text-muted">
+              {this.props.recipe.sourceName}
+            </CardSubtitle>
+            <div className="Recipe-information">
+              <ul className="ingredients">
+                TODO PUT ACTUAL INGREDIENTS FROM API
+                <li>ingredient 1</li>
+                <li>ingredient 2</li>
+              </ul>
+              <ol className="instructions">
+                {this.props.recipe.analyzedInstructions[0].steps.map((step) => {
+                  return (
+                    <li
+                      key={this.props.recipe.id + step.number}
+                    >{`${step.number}. ${step.step}`}</li>
+                  );
+                })}
+              </ol>
+              <Button href={this.props.recipe.sourceUrl} target="_blank">
+                Visit Recipe Website
+              </Button>
+            </div>
+          </CardBody>
+        */}
+        </Card>
+      </Col>
     );
   }
 }
