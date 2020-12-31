@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Table } from "reactstrap";
 import "./Schedule.css";
-import Recipe from "./Recipe";
+import MealCard from "./MealCard";
 
 class Schedule extends React.Component {
   render() {
@@ -34,8 +34,12 @@ class Schedule extends React.Component {
                       {days.map((day) => {
                         return (
                           <td>
-                            {this.props.meals[day][lowerCaseMeal] ? (
-                              <Recipe
+                            {this.props.meals[day][lowerCaseMeal] &&
+                            (this.props.meals[day][lowerCaseMeal]
+                              .analyzedInstructions ||
+                              this.props.meals[day][lowerCaseMeal]
+                                .readyInMinutes) ? (
+                              <MealCard
                                 recipe={this.props.meals[day][lowerCaseMeal]}
                                 key={this.props.meals[day][lowerCaseMeal].id}
                                 isRemoval={true}

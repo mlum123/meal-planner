@@ -22,6 +22,7 @@ class View extends React.Component {
                     onRecipeSearch={this.props.onRecipeSearch}
                     onAdd={this.props.onAdd}
                     recipes={this.props.recipes}
+                    restaurants={this.props.restaurants}
                   />
                 )}
               </Col>

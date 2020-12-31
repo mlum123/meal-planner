@@ -11,7 +11,7 @@ class App extends React.Component {
 
     this.state = {
       recipeSearchResults: [],
-      restaurantSearchResults: [],
+      restaurantSearchResults: [{ restaurant: "McDonalds" }],
       meals: {
         mon: { breakfast: null, lunch: null, dinner: null },
         tues: { breakfast: null, lunch: null, dinner: null },
@@ -31,15 +31,12 @@ class App extends React.Component {
     let meals = this.state.meals;
     meals[day][time] = meal;
     this.setState({ meals: meals });
-    console.log(meals);
   }
 
   removeMeal(day, time) {
-    console.log(this.state.meals);
     let meals = this.state.meals;
     meals[day][time] = null;
     this.setState({ meals: meals });
-    console.log(meals);
   }
 
   recipeSearch(dish, ingredients, cuisine) {
@@ -82,6 +79,7 @@ class App extends React.Component {
                 onAdd={this.addMeal}
                 onRemove={this.removeMeal}
                 recipes={this.state.recipeSearchResults}
+                restaurants={this.state.restaurantSearchResults}
               />
             </Col>
           </Row>

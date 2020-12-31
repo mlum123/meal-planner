@@ -16,9 +16,9 @@ import {
   Label,
   Input,
 } from "reactstrap";
-import "./Recipe.css";
+import "./MealCard.css";
 
-class Recipe extends React.Component {
+class MealCard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,22 +29,24 @@ class Recipe extends React.Component {
       showDetails: false,
     };
 
-    this.addRecipe = this.addRecipe.bind(this);
-    this.removeRecipe = this.removeRecipe.bind(this);
+    this.addMeal = this.addMeal.bind(this);
+    this.removeMeal = this.removeMeal.bind(this);
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onHover = this.onHover.bind(this);
     this.onHoverLeave = this.onHoverLeave.bind(this);
   }
 
-  addRecipe() {
+  addMeal() {
     if (this.props.recipe && this.state.day && this.state.time) {
       this.props.onAdd(this.props.recipe, this.state.day, this.state.time);
+    } else if (this.props.restaurant && this.state.day && this.state.time) {
+      this.props.onAdd(this.props.restaurant, this.state.day, this.state.time);
     }
     this.toggle();
   }
 
-  removeRecipe() {
+  removeMeal() {
     this.props.onRemove(this.state.day, this.state.time);
   }
 
@@ -70,8 +72,8 @@ class Recipe extends React.Component {
     if (this.props.isRemoval) {
       return (
         <Button
-          className="Recipe-action float-right btn-sm"
-          onClick={this.removeRecipe}
+          className="Meal-action float-right btn-sm"
+          onClick={this.removeMeal}
         >
           -
         </Button>
@@ -80,13 +82,15 @@ class Recipe extends React.Component {
       return (
         <div>
           <Button
-            className="Recipe-action float-right btn-sm"
+            className="Meal-action float-right btn-sm"
             onClick={this.toggle}
           >
             +
           </Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle}>
-            <ModalHeader>Add recipe to meal schedule</ModalHeader>
+            <ModalHeader>
+              Add {this.props.recipe ? "recipe" : "restaurant"} to meal schedule
+            </ModalHeader>
             <ModalBody>
               <Container>
                 <Row>
@@ -218,7 +222,7 @@ class Recipe extends React.Component {
               </Container>
               <Button
                 className="SearchButton float-right"
-                onClick={this.addRecipe}
+                onClick={this.addMeal}
               >
                 add
               </Button>
@@ -232,91 +236,99 @@ class Recipe extends React.Component {
   render() {
     return (
       <Col className="my-2">
-        <Card
-          className="Recipe h-100 w-100"
-          onMouseEnter={this.onHover}
-          onMouseLeave={this.onHoverLeave}
-        >
-          <div className="mx-auto">
-            <CardImg
-              src={this.props.recipe.image}
-              alt="Recipe img"
-              className="card-img p-3"
-            />
-          </div>
-          <CardBody>
-            <Row>
-              <Col xs="9">
-                <CardTitle tag="h5">{this.props.recipe.title}</CardTitle>
-              </Col>
-              <Col xs="3">{this.renderAction()}</Col>
-            </Row>
-            {this.state.showDetails === this.props.key ? (
-              <div>
-                {this.props.recipe.vegetarian ? (
-                  <div>
-                    vegetarian
-                    <span></span> <i class="fas fa-carrot"></i>
-                  </div>
-                ) : null}
-                {this.props.recipe.vegan ? (
-                  <div>
-                    vegan
-                    <span></span> <i class="fas fa-seedling"></i>
-                  </div>
-                ) : null}
-                {this.props.recipe.readyInMinutes ? (
-                  <div>
-                    ready in {this.props.recipe.readyInMinutes} min
-                    <span></span> <i class="far fa-clock"></i>
-                  </div>
-                ) : null}
-                {this.props.recipe.servings ? (
-                  <div>{this.props.recipe.servings} servings</div>
-                ) : null}
-                <br></br>
-                {this.props.recipe.analyzedInstructions[0] ? (
-                  <ul className="ingredients">
-                    <span>Ingredients</span>
-                    <br></br>
-                    {this.props.recipe.analyzedInstructions[0].steps.map(
-                      (step) => {
-                        return step.ingredients.map((ingredient) => {
-                          return "  |  " + ingredient.name;
-                        });
-                      }
-                    )}
-                  </ul>
-                ) : null}
-                {this.props.recipe.analyzedInstructions[0] ? (
-                  <ol className="instructions">
-                    <span>Steps</span>
-                    {this.props.recipe.analyzedInstructions[0].steps.map(
-                      (step) => {
-                        return (
-                          <div>
-                            <li
-                              key={this.props.recipe.id + step.number}
-                            >{`${step.number}. ${step.step}`}</li>
-                            <br></br>
-                          </div>
-                        );
-                      }
-                    )}
-                  </ol>
-                ) : null}
-                {this.props.recipe.sourceUrl ? (
-                  <Button href={this.props.recipe.sourceUrl} target="_blank">
-                    Visit Recipe Website
-                  </Button>
-                ) : null}
-              </div>
-            ) : null}
-          </CardBody>
-        </Card>
+        {this.props.recipe ? (
+          <Card
+            className="Meal h-100 w-100"
+            onMouseEnter={this.onHover}
+            onMouseLeave={this.onHoverLeave}
+          >
+            <div className="mx-auto">
+              <CardImg
+                src={this.props.recipe.image}
+                alt="Meal img"
+                className="card-img p-4"
+              />
+            </div>
+            <CardBody>
+              <Row>
+                <Col xs="9">
+                  <CardTitle tag="h5">{this.props.recipe.title}</CardTitle>
+                </Col>
+                <Col xs="3">{this.renderAction()}</Col>
+              </Row>
+              {this.state.showDetails === this.props.key ? (
+                <div>
+                  {this.props.recipe.sourceName ? (
+                    <span>from {this.props.recipe.sourceName}</span>
+                  ) : null}
+                  {this.props.recipe.vegetarian ? (
+                    <div>
+                      vegetarian
+                      <span></span> <i class="fas fa-carrot"></i>
+                    </div>
+                  ) : null}
+                  {this.props.recipe.vegan ? (
+                    <div>
+                      vegan
+                      <span></span> <i class="fas fa-seedling"></i>
+                    </div>
+                  ) : null}
+                  {this.props.recipe.readyInMinutes ? (
+                    <div>
+                      ready in {this.props.recipe.readyInMinutes} min
+                      <span></span> <i class="far fa-clock"></i>
+                    </div>
+                  ) : null}
+                  {this.props.recipe.servings ? (
+                    <div>{this.props.recipe.servings} servings</div>
+                  ) : null}
+                  <br></br>
+                  {this.props.recipe.analyzedInstructions[0] ? (
+                    <ul className="ingredients">
+                      <span>Ingredients</span>
+                      <br></br>
+                      {this.props.recipe.analyzedInstructions[0].steps.map(
+                        (step) => {
+                          return step.ingredients.map((ingredient) => {
+                            return "  |  " + ingredient.name;
+                          });
+                        }
+                      )}
+                    </ul>
+                  ) : null}
+                  {this.props.recipe.analyzedInstructions[0] ? (
+                    <ol className="instructions">
+                      <span>Steps</span>
+                      {this.props.recipe.analyzedInstructions[0].steps.map(
+                        (step) => {
+                          return (
+                            <div>
+                              <li
+                                key={this.props.recipe.id + step.number}
+                              >{`${step.number}. ${step.step}`}</li>
+                              <br></br>
+                            </div>
+                          );
+                        }
+                      )}
+                    </ol>
+                  ) : null}
+                  {this.props.recipe.sourceUrl ? (
+                    <Button href={this.props.recipe.sourceUrl} target="_blank">
+                      Visit Recipe Website
+                    </Button>
+                  ) : null}
+                </div>
+              ) : null}
+            </CardBody>
+          </Card>
+        ) : (
+          this.props.restaurant
+            .restaurant /* TODO: put restaurant card stuff here */
+        )}
       </Col>
     );
   }
 }
 
-export default Recipe;
+export default MealCard;

@@ -55,6 +55,7 @@ class Toggler extends React.Component {
                   onAdd={this.props.onAdd}
                   onRemove={this.props.onRemove}
                   recipes={this.props.recipes}
+                  restaurants={this.props.restaurants}
                 />
               </Col>
             </Row>

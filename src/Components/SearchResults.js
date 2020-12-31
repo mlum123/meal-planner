@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, CardDeck } from "reactstrap";
 import SearchBar from "./SearchBar";
-import Recipe from "./Recipe";
+import MealCard from "./MealCard";
 
 class SearchResults extends React.Component {
   render() {
@@ -18,20 +18,28 @@ class SearchResults extends React.Component {
               </Col>
             </Row>
             <CardDeck className="mt-3">
-              {this.props.view === "recipe" ? (
-                this.props.recipes.map((recipe) => {
-                  return (
-                    <Recipe
-                      recipe={recipe}
-                      key={recipe.id}
-                      onAdd={this.props.onAdd}
-                      isRemoval={false}
-                    />
-                  );
-                })
-              ) : (
-                <h1>Restaurants</h1>
-              )}
+              {this.props.view === "recipe"
+                ? this.props.recipes.map((recipe) => {
+                    return (
+                      <MealCard
+                        recipe={recipe}
+                        key={recipe.id}
+                        onAdd={this.props.onAdd}
+                        isRemoval={false}
+                      />
+                    );
+                  })
+                : this.props.restaurants.map((restaurant) => {
+                    console.log(restaurant);
+                    return (
+                      <MealCard
+                        restaurant={restaurant}
+                        key={restaurant.id}
+                        onAdd={this.props.onAdd}
+                        isRemoval={false}
+                      />
+                    );
+                  })}
             </CardDeck>
           </Container>
         </header>
