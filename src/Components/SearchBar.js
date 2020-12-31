@@ -135,7 +135,7 @@ class SearchBar extends React.Component {
                             id={secondInput.toLowerCase()}
                             placeholder={
                               this.props.view === "recipe"
-                                ? "enter ingredients in a comma-separated list"
+                                ? "enter ingredients in a comma-separated list" /* TODO: shorten for small screens */
                                 : "enter your city"
                             }
                             onChange={this.handleChange}

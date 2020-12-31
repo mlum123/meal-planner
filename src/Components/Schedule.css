@@ -1,6 +1,5 @@
 Table {
-  max-width: 500px;
-  overflow-x: auto;
+  table-layout: fixed;
 }
 
 th {

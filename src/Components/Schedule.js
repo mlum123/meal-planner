@@ -9,29 +9,25 @@ class Schedule extends React.Component {
     let meals = ["Breakfast", "Lunch", "Dinner"];
 
     return (
-      <Container fluid={true} className="Schedule">
+      <Container className="Schedule">
         <Row>
           <Col xs="12" className="mt-3">
             <Table className="mx-auto">
               <thead>
                 <tr>
                   <th></th>
-                  <th>Monday</th>
-                  <th>Tuesday</th>
-                  <th>Wednesday</th>
-                  <th>Thursday</th>
-                  <th>Friday</th>
-                  <th>Saturday</th>
-                  <th>Sunday</th>
+                  <th>Breakfast</th>
+                  <th>Lunch</th>
+                  <th>Dinner</th>
                 </tr>
               </thead>
               <tbody>
-                {meals.map((meal) => {
-                  let lowerCaseMeal = meal.toLowerCase();
+                {days.map((day) => {
                   return (
                     <tr>
-                      <th scope="row">{meal}</th>
-                      {days.map((day) => {
+                      <th scope="row">{day}</th>
+                      {meals.map((meal) => {
+                        let lowerCaseMeal = meal.toLowerCase();
                         return (
                           <td>
                             {this.props.meals[day][lowerCaseMeal] &&
