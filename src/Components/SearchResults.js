@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Row, Col, CardGroup } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  CardGroup,
+  CardColumns,
+  CardDeck,
+} from "reactstrap";
 import SearchBar from "./SearchBar";
 import Recipe from "./Recipe";
 
@@ -17,7 +24,7 @@ class SearchResults extends React.Component {
                 />
               </Col>
             </Row>
-            <CardGroup className="mt-3">
+            <CardDeck className="mt-3">
               {this.props.view === "recipe" ? (
                 this.props.recipes.map((recipe) => {
                   return (
@@ -32,7 +39,7 @@ class SearchResults extends React.Component {
               ) : (
                 <h1>Restaurants</h1>
               )}
-            </CardGroup>
+            </CardDeck>
           </Container>
         </header>
       </div>

@@ -7,7 +7,6 @@ import {
   Button,
   CardImg,
   CardTitle,
-  CardSubtitle,
   CardBody,
   Modal,
   ModalHeader,
@@ -39,7 +38,9 @@ class Recipe extends React.Component {
   }
 
   addRecipe() {
-    this.props.onAdd(this.props.recipe, this.state.day, this.state.time);
+    if (this.props.recipe && this.state.day && this.state.time) {
+      this.props.onAdd(this.props.recipe, this.state.day, this.state.time);
+    }
     this.toggle();
   }
 
@@ -215,7 +216,10 @@ class Recipe extends React.Component {
                   </Col>
                 </Row>
               </Container>
-              <Button className="SearchButton" onClick={this.addRecipe}>
+              <Button
+                className="SearchButton float-right"
+                onClick={this.addRecipe}
+              >
                 add
               </Button>
             </ModalBody>
@@ -227,9 +231,9 @@ class Recipe extends React.Component {
 
   render() {
     return (
-      <Col className="xs-12 md-6 lg-4 my-2">
+      <Col className="my-2">
         <Card
-          className="Recipe h-100"
+          className="Recipe h-100 w-100"
           onMouseEnter={this.onHover}
           onMouseLeave={this.onHoverLeave}
         >
@@ -241,71 +245,52 @@ class Recipe extends React.Component {
             />
           </div>
           <CardBody>
-            <CardTitle tag="h5">
-              {this.props.recipe.title} {this.renderAction()}
-            </CardTitle>
+            <Row>
+              <Col xs="9">
+                <CardTitle tag="h5">{this.props.recipe.title}</CardTitle>
+              </Col>
+              <Col xs="3">{this.renderAction()}</Col>
+            </Row>
             {this.state.showDetails === this.props.key ? (
               <div>
-                <ul className="ingredients">
-                  {/* TODO PUT ACTUAL INGREDIENTS FROM API */}
-                  <li>ingredient 1</li>
-                  <li>ingredient 2</li>
-                </ul>
-                <ol className="instructions">
-                  {this.props.recipe.analyzedInstructions[0].steps.map(
-                    (step) => {
-                      return (
-                        <div>
-                          <li
-                            key={this.props.recipe.id + step.number}
-                          >{`${step.number}. ${step.step}`}</li>
-                          <br></br>
-                        </div>
-                      );
-                    }
-                  )}
-                </ol>
-                <Button href={this.props.recipe.sourceUrl} target="_blank">
-                  Visit Recipe Website
-                </Button>
+                {this.props.recipe.analyzedInstructions[0] ? (
+                  <ul className="ingredients">
+                    <span>Ingredients</span>
+                    <br></br>
+                    {this.props.recipe.analyzedInstructions[0].steps.map(
+                      (step) => {
+                        return step.ingredients.map((ingredient) => {
+                          return "  |  " + ingredient.name;
+                        });
+                      }
+                    )}
+                  </ul>
+                ) : null}
+                {this.props.recipe.analyzedInstructions[0] ? (
+                  <ol className="instructions">
+                    <span>Steps</span>
+                    {this.props.recipe.analyzedInstructions[0].steps.map(
+                      (step) => {
+                        return (
+                          <div>
+                            <li
+                              key={this.props.recipe.id + step.number}
+                            >{`${step.number}. ${step.step}`}</li>
+                            <br></br>
+                          </div>
+                        );
+                      }
+                    )}
+                  </ol>
+                ) : null}
+                {this.props.recipe.sourceUrl ? (
+                  <Button href={this.props.recipe.sourceUrl} target="_blank">
+                    Visit Recipe Website
+                  </Button>
+                ) : null}
               </div>
             ) : null}
           </CardBody>
-          {/*
-          <CardImg
-            src={this.props.recipe.image}
-            alt="Recipe img"
-            className="card-img mx-auto py-4"
-          />
-          <CardBody className="Recipe-title">
-            <CardTitle tag="h5">
-              {this.props.recipe.title}
-              {this.renderAction()}
-            </CardTitle>
-            <CardSubtitle tag="h6" className="mb-2 text-muted">
-              {this.props.recipe.sourceName}
-            </CardSubtitle>
-            <div className="Recipe-information">
-              <ul className="ingredients">
-                TODO PUT ACTUAL INGREDIENTS FROM API
-                <li>ingredient 1</li>
-                <li>ingredient 2</li>
-              </ul>
-              <ol className="instructions">
-                {this.props.recipe.analyzedInstructions[0].steps.map((step) => {
-                  return (
-                    <li
-                      key={this.props.recipe.id + step.number}
-                    >{`${step.number}. ${step.step}`}</li>
-                  );
-                })}
-              </ol>
-              <Button href={this.props.recipe.sourceUrl} target="_blank">
-                Visit Recipe Website
-              </Button>
-            </div>
-          </CardBody>
-        */}
         </Card>
       </Col>
     );
