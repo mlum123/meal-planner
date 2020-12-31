@@ -31,7 +31,6 @@ class SearchResults extends React.Component {
                     );
                   })
                 : this.props.restaurants.map((restaurant) => {
-                    console.log(restaurant);
                     return (
                       <MealCard
                         restaurant={restaurant}

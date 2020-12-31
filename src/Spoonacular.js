@@ -49,6 +49,9 @@ const Spoonacular = {
           cuisines: recipe.cuisines,
           analyzedInstructions: recipe.analyzedInstructions,
         }));
+      })
+      .catch((error) => {
+        console.log(error);
       });
   },
 };

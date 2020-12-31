@@ -12,7 +12,7 @@ class App extends React.Component {
 
     this.state = {
       recipeSearchResults: [],
-      restaurantSearchResults: [{ restaurant: "McDonalds" }],
+      restaurantSearchResults: [],
       meals: {
         mon: { breakfast: null, lunch: null, dinner: null },
         tues: { breakfast: null, lunch: null, dinner: null },
@@ -26,6 +26,7 @@ class App extends React.Component {
     this.addMeal = this.addMeal.bind(this);
     this.removeMeal = this.removeMeal.bind(this);
     this.recipeSearch = this.recipeSearch.bind(this);
+    this.restaurantSearch = this.restaurantSearch.bind(this);
   }
 
   addMeal(meal, day, time) {
