@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  CardGroup,
-  CardColumns,
-  CardDeck,
-} from "reactstrap";
+import { Container, Row, Col, CardDeck } from "reactstrap";
 import SearchBar from "./SearchBar";
 import Recipe from "./Recipe";
 

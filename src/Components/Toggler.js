@@ -18,7 +18,7 @@ class Toggler extends React.Component {
     return (
       <div className="Toggler">
         <header>
-          <Container>
+          <Container fluid="true">
             <Row>
               <Col xs="12" className="mt-3 text-center">
                 <ButtonGroup>

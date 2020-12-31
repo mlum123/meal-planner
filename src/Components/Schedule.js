@@ -12,7 +12,7 @@ class Schedule extends React.Component {
       <Container fluid={true} className="Schedule">
         <Row>
           <Col xs="12" className="mt-3">
-            <Table>
+            <Table className="mx-auto">
               <thead>
                 <tr>
                   <th></th>

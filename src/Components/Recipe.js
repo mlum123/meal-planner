@@ -253,6 +253,28 @@ class Recipe extends React.Component {
             </Row>
             {this.state.showDetails === this.props.key ? (
               <div>
+                {this.props.recipe.vegetarian ? (
+                  <div>
+                    vegetarian
+                    <span></span> <i class="fas fa-carrot"></i>
+                  </div>
+                ) : null}
+                {this.props.recipe.vegan ? (
+                  <div>
+                    vegan
+                    <span></span> <i class="fas fa-seedling"></i>
+                  </div>
+                ) : null}
+                {this.props.recipe.readyInMinutes ? (
+                  <div>
+                    ready in {this.props.recipe.readyInMinutes} min
+                    <span></span> <i class="far fa-clock"></i>
+                  </div>
+                ) : null}
+                {this.props.recipe.servings ? (
+                  <div>{this.props.recipe.servings} servings</div>
+                ) : null}
+                <br></br>
                 {this.props.recipe.analyzedInstructions[0] ? (
                   <ul className="ingredients">
                     <span>Ingredients</span>

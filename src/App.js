@@ -73,7 +73,7 @@ class App extends React.Component {
             </Row>
           </Container>
         </header>
-        <Container>
+        <Container fluid="true">
           <Row>
             <Col xs="12">
               <Toggler
