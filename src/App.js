@@ -2,8 +2,9 @@ import React from "react";
 import "./App.css";
 import { Container, Row, Col } from "reactstrap";
 import Toggler from "./Components/Toggler";
-import Spoonacular from "./Spoonacular";
 import FailedSearch from "./Components/FailedSearch";
+import Spoonacular from "./Spoonacular";
+import Yelp from "./Yelp";
 
 class App extends React.Component {
   constructor(props) {
@@ -58,6 +59,25 @@ class App extends React.Component {
     );
   }
 
+  restaurantSearch(restaurant, location, cuisine) {
+    Yelp.restaurantSearch(restaurant, location, cuisine).then(
+      (restaurantSearchResults) => {
+        if (restaurantSearchResults.length === 0) {
+          // no recipes found, display failure message
+          this.setState({
+            restaurantSearchResults: [],
+            failedSearch: true,
+          });
+        } else {
+          this.setState({
+            restaurantSearchResults: restaurantSearchResults,
+            failedSearch: false,
+          });
+        }
+      }
+    );
+  }
+
   render() {
     return (
       <div className="App">
@@ -76,6 +96,7 @@ class App extends React.Component {
               <Toggler
                 meals={this.state.meals}
                 onRecipeSearch={this.recipeSearch}
+                onRestaurantSearch={this.restaurantSearch}
                 onAdd={this.addMeal}
                 onRemove={this.removeMeal}
                 recipes={this.state.recipeSearchResults}

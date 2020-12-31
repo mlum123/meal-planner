@@ -15,10 +15,17 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { dish: "", ingredients: "", cuisine: "" };
+    this.state = {
+      dish: "",
+      ingredients: "",
+      cuisine: "",
+      restaurant: "",
+      location: "",
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.recipeSearch = this.recipeSearch.bind(this);
+    this.restaurantSearch = this.restaurantSearch.bind(this);
   }
 
   handleChange(event) {
@@ -31,6 +38,14 @@ class SearchBar extends React.Component {
     this.props.onRecipeSearch(
       this.state.dish,
       this.state.ingredients,
+      this.state.cuisine
+    );
+  }
+
+  restaurantSearch() {
+    this.props.onRestaurantSearch(
+      this.state.restaurant,
+      this.state.location,
       this.state.cuisine
     );
   }
@@ -159,7 +174,11 @@ class SearchBar extends React.Component {
                 </div>
                 <Button
                   className="SearchButton float-right"
-                  onClick={this.recipeSearch}
+                  onClick={
+                    this.props.view === "recipe"
+                      ? this.recipeSearch
+                      : this.restaurantSearch
+                  }
                 >
                   search
                 </Button>

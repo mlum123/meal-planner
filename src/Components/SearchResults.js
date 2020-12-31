@@ -14,6 +14,7 @@ class SearchResults extends React.Component {
                 <SearchBar
                   view={this.props.view}
                   onRecipeSearch={this.props.onRecipeSearch}
+                  onRestaurantSearch={this.props.onRestaurantSearch}
                 />
               </Col>
             </Row>

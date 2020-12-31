@@ -52,6 +52,7 @@ class Toggler extends React.Component {
                   view={this.state.view}
                   meals={this.props.meals}
                   onRecipeSearch={this.props.onRecipeSearch}
+                  onRestaurantSearch={this.props.onRestaurantSearch}
                   onAdd={this.props.onAdd}
                   onRemove={this.props.onRemove}
                   recipes={this.props.recipes}
