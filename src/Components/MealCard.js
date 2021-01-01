@@ -335,7 +335,7 @@ class MealCard extends React.Component {
                 className="card-img"
               />
             </div>
-            <CardBody>
+            <CardBody className="card-body">
               <Row>
                 <Col xs="9">
                   <CardTitle tag="h5">{this.props.restaurant.name}</CardTitle>

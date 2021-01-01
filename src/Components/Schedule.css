@@ -1,3 +1,7 @@
-th {
+.table-head {
   font-weight: bold;
+}
+
+.td-parent {
+  min-height: 200px;
 }

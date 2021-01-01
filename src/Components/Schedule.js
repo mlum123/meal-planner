@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Table } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 import "./Schedule.css";
 import MealCard from "./MealCard";
 
@@ -9,65 +9,54 @@ class Schedule extends React.Component {
     let meals = ["Breakfast", "Lunch", "Dinner"];
 
     return (
-      <Container className="Schedule">
+      <Container className="Schedule mt-3">
         <Row>
-          <Col xs="12" className="mt-3">
-            <Table className="mx-auto">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th className="text-center">Breakfast</th>
-                  <th className="text-center">Lunch</th>
-                  <th className="text-center">Dinner</th>
-                </tr>
-              </thead>
-              <tbody>
-                {days.map((day) => {
+          <Col className="xs-4 table-head text-center">Breakfast</Col>
+          <Col className="xs-4 table-head text-center">Lunch</Col>
+          <Col className="xs-4 table-head text-center">Dinner</Col>
+        </Row>
+        {days.map((day) => {
+          return (
+            <>
+              <hr></hr>
+              <Row key={day}>
+                <div className="table-head">{day}</div>
+                {meals.map((meal) => {
+                  let lowerCaseMeal = meal.toLowerCase();
                   return (
-                    <tr key={day}>
-                      <th scope="row">{day}</th>
-                      {meals.map((meal) => {
-                        let lowerCaseMeal = meal.toLowerCase();
-                        return (
-                          <td key={day + lowerCaseMeal}>
-                            {this.props.meals[day][lowerCaseMeal] &&
-                            (this.props.meals[day][lowerCaseMeal]
-                              .analyzedInstructions ||
-                              this.props.meals[day][lowerCaseMeal]
-                                .readyInMinutes) ? (
-                              <MealCard
-                                recipe={this.props.meals[day][lowerCaseMeal]}
-                                key={this.props.meals[day][lowerCaseMeal].id}
-                                isRemoval={true}
-                                onRemove={this.props.onRemove}
-                                day={day}
-                                time={lowerCaseMeal}
-                              />
-                            ) : null}
-                            {this.props.meals[day][lowerCaseMeal] &&
-                            (this.props.meals[day][lowerCaseMeal].location ||
-                              this.props.meals[day][lowerCaseMeal].price) ? (
-                              <MealCard
-                                restaurant={
-                                  this.props.meals[day][lowerCaseMeal]
-                                }
-                                key={this.props.meals[day][lowerCaseMeal].id}
-                                isRemoval={true}
-                                onRemove={this.props.onRemove}
-                                day={day}
-                                time={lowerCaseMeal}
-                              />
-                            ) : null}
-                          </td>
-                        );
-                      })}
-                    </tr>
+                    <Col className="xs-4 td-parent" key={day + lowerCaseMeal}>
+                      {this.props.meals[day][lowerCaseMeal] &&
+                      (this.props.meals[day][lowerCaseMeal]
+                        .analyzedInstructions ||
+                        this.props.meals[day][lowerCaseMeal].readyInMinutes) ? (
+                        <MealCard
+                          recipe={this.props.meals[day][lowerCaseMeal]}
+                          key={this.props.meals[day][lowerCaseMeal].id}
+                          isRemoval={true}
+                          onRemove={this.props.onRemove}
+                          day={day}
+                          time={lowerCaseMeal}
+                        />
+                      ) : null}
+                      {this.props.meals[day][lowerCaseMeal] &&
+                      (this.props.meals[day][lowerCaseMeal].location ||
+                        this.props.meals[day][lowerCaseMeal].price) ? (
+                        <MealCard
+                          restaurant={this.props.meals[day][lowerCaseMeal]}
+                          key={this.props.meals[day][lowerCaseMeal].id}
+                          isRemoval={true}
+                          onRemove={this.props.onRemove}
+                          day={day}
+                          time={lowerCaseMeal}
+                        />
+                      ) : null}
+                    </Col>
                   );
                 })}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
+              </Row>
+            </>
+          );
+        })}
       </Container>
     );
   }
