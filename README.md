@@ -1,3 +1,13 @@
+This is a responsive meal planner web application, made with React, the Spoonacular API, and the Yelp Fusion API in December 2020.
+
+You can search for recipes by several criteria: dish name, the ingredients you wish to use, and cuisine.
+You can also search for restaurants by restaurant name, location, and cuisine.
+
+Then, you can add recipes and restaurants to a meal schedule that allows you to visually plan your meals for the week.
+
+## Technologies Used
+React, Reactstrap for using Bootstrap components in React, JavaScript, CSS, the Fetch API and Axios for making requests to APIs
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
