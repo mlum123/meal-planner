@@ -5,6 +5,8 @@ You can also search for restaurants by restaurant name, location, and cuisine.
 
 Then, you can add recipes and restaurants to a meal schedule that allows you to visually plan your meals for the week.
 
+Deployed at http://michelles-meal-planner.surge.sh/
+
 ## Technologies Used
 React, Reactstrap for using Bootstrap components in React, JavaScript, CSS, the Fetch API and Axios for making requests to APIs
 
