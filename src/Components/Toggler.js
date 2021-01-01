@@ -28,21 +28,21 @@ class Toggler extends React.Component {
               <Col xs="12" className="mt-3 text-center">
                 <ButtonGroup>
                   <Button
-                    className="font-weight-bold px-4"
+                    className="toggler font-weight-bold px-4"
                     value="recipe"
                     onClick={this.handleClick}
                   >
                     Recipe Search
                   </Button>
                   <Button
-                    className="font-weight-bold px-4"
+                    className="toggler font-weight-bold px-4"
                     value="restaurant"
                     onClick={this.handleClick}
                   >
                     Restaurant Search
                   </Button>
                   <Button
-                    className="font-weight-bold px-4"
+                    className="toggler font-weight-bold px-4"
                     value="schedule"
                     onClick={this.handleClick}
                   >

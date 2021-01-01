@@ -25,6 +25,7 @@ span {
   font-style: italic;
 }
 
+/* crop card images to make them all the same height */
 .card-img {
   object-fit: cover;
   height: 200px;

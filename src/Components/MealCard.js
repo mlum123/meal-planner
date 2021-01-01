@@ -72,6 +72,7 @@ class MealCard extends React.Component {
     if (this.props.isRemoval) {
       return (
         <Button
+          color="danger"
           className="Meal-action float-right btn-sm"
           onClick={this.removeMeal}
         >
@@ -82,6 +83,7 @@ class MealCard extends React.Component {
       return (
         <div>
           <Button
+            color="success"
             className="Meal-action float-right btn-sm"
             onClick={this.toggle}
           >
@@ -221,6 +223,7 @@ class MealCard extends React.Component {
                 </Row>
               </Container>
               <Button
+                color="primary"
                 className="SearchButton float-right"
                 onClick={this.addMeal}
               >

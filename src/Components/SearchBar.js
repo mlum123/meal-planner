@@ -135,7 +135,7 @@ class SearchBar extends React.Component {
                             id={secondInput.toLowerCase()}
                             placeholder={
                               this.props.view === "recipe"
-                                ? "enter ingredients in a comma-separated list" /* TODO: shorten for small screens */
+                                ? "enter ingredients in a comma-separated list"
                                 : "enter your city"
                             }
                             onChange={this.handleChange}
@@ -173,6 +173,7 @@ class SearchBar extends React.Component {
                   </Form>
                 </div>
                 <Button
+                  color="primary"
                   className="SearchButton float-right"
                   onClick={
                     this.props.view === "recipe"
