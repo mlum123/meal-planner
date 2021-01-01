@@ -85,36 +85,38 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header>
+        <div className="not-footer">
+          <header>
+            <Container>
+              <Row>
+                <Col xs="12" className="mt-3 text-center">
+                  <h1 className="font-weight-bold">meal planner</h1>
+                </Col>
+              </Row>
+            </Container>
+          </header>
           <Container>
             <Row>
-              <Col xs="12" className="mt-3 text-center">
-                <h1 className="font-weight-bold">meal planner</h1>
+              <Col xs="12">
+                <Toggler
+                  meals={this.state.meals}
+                  onRecipeSearch={this.recipeSearch}
+                  onRestaurantSearch={this.restaurantSearch}
+                  onAdd={this.addMeal}
+                  onRemove={this.removeMeal}
+                  recipes={this.state.recipeSearchResults}
+                  restaurants={this.state.restaurantSearchResults}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12" className="text-center">
+                {this.state.failedSearch ? <FailedSearch /> : null}
               </Col>
             </Row>
           </Container>
-        </header>
-        <Container>
-          <Row>
-            <Col xs="12">
-              <Toggler
-                meals={this.state.meals}
-                onRecipeSearch={this.recipeSearch}
-                onRestaurantSearch={this.restaurantSearch}
-                onAdd={this.addMeal}
-                onRemove={this.removeMeal}
-                recipes={this.state.recipeSearchResults}
-                restaurants={this.state.restaurantSearchResults}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col xs="12" className="text-center">
-              {this.state.failedSearch ? <FailedSearch /> : null}
-            </Col>
-          </Row>
-        </Container>
-        <footer className="bg-light">
+        </div>
+        <footer className="float-bottom bg-light">
           <Container fluid="true">
             <p className="text-center p-5 mt-4">
               made with React, the Spoonacular API, and the Yelp Fusion API

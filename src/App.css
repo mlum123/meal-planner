@@ -1,3 +1,11 @@
 .App {
   font-family: "Varela Round", sans-serif;
 }
+
+.not-footer {
+  padding-bottom: 150px;
+}
+
+footer {
+  height: 150px;
+}
