@@ -1,3 +1,4 @@
+// FailedSearch component displays when no recipe or restaurant results are found with a user's search query criteria
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 

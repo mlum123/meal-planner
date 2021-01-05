@@ -1,3 +1,4 @@
+// View component shows either recipe search, restaurant search, or meal schedule views depending on the view props passed to it
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Schedule from "./Schedule";

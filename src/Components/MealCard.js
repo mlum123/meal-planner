@@ -1,3 +1,4 @@
+// MealCard component, with contents dependent on the view (recipe, restaurant, or schedule)
 import React from "react";
 import {
   Container,
@@ -50,16 +51,19 @@ class MealCard extends React.Component {
     this.props.onRemove(this.state.day, this.state.time);
   }
 
+  // to hide or reveal modal for putting recipe / restaurant in schedule
   toggle() {
     this.setState({ modal: !this.state.modal });
   }
 
+  // records user selection of day and time when user schedules recipe / restaurant for a meal
   handleChange(event) {
     let { name, value } = event.target;
 
     this.setState({ [name]: value });
   }
 
+  // hover functions set state to show details about recipe when user hovers on recipe card
   onHover() {
     this.setState({ showDetails: this.props.key });
   }
@@ -68,6 +72,8 @@ class MealCard extends React.Component {
     this.setState({ showDetails: "" });
   }
 
+  // if on schedule view, displays - button to delete meal card from schedule
+  // if on search view, displays + button to add mael card to schedule
   renderAction() {
     if (this.props.isRemoval) {
       return (

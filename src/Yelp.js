@@ -16,7 +16,7 @@ const Yelp = {
 
     const endpoint = "businesses/search";
 
-    // use cors-anywhere to avoid problems with yelp fusion api
+    // use cors-anywhere to make requests to yelp fusion api
     return axios
       .get("https://cors-anywhere.herokuapp.com/" + baseUrl + endpoint, {
         headers: {

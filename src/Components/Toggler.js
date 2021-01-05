@@ -1,3 +1,4 @@
+// Toggler component displays 3 buttons to switch between recipe search, restaurant search, and schedule views
 import React from "react";
 import { Container, Row, Col, Button, ButtonGroup } from "reactstrap";
 import View from "./View";

@@ -1,3 +1,4 @@
+// SearchResults component displays recipe or restaurant SearchBar and cards depending on the view props
 import React from "react";
 import { Container, Row, Col, CardDeck } from "reactstrap";
 import SearchBar from "./SearchBar";

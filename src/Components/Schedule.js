@@ -1,3 +1,4 @@
+// Schedule component for meal schedule view, responsive
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import "./Schedule.css";
